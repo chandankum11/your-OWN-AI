@@ -1073,6 +1073,9 @@ int main() {
            << ",\"metrics\":[\"euclidean\",\"cosine\",\"manhattan\"]}";
         res.set_content(ss.str(), "application/json");
     });
+    svr.Get("/health", [](const httplib::Request&, httplib::Response& res) {
+    res.set_content("{\"status\":\"ok\"}", "application/json");
+});
 
     // Serve index.html
     svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
