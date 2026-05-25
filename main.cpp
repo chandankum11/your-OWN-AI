@@ -773,7 +773,7 @@ int main() {
     // Check Ollama at startup (non-fatal)
     bool ollamaUp = ollama.isAvailable();
     std::cout << "=== VectorDB Engine ===" << std::endl;
-    std::cout << "http://localhost:8080" << std::endl;
+    std::cout << "https://your-own-ai-heqb.onrender.com" << std::endl;
     std::cout << db.size() << " demo vectors | " << DIMS << " dims | HNSW+KD-Tree+BruteForce" << std::endl;
     std::cout << "Ollama: " << (ollamaUp ? "ONLINE" : "OFFLINE (install from ollama.com)") << std::endl;
     if (ollamaUp) std::cout << "  embed model: " << ollama.embedModel
@@ -1087,6 +1087,9 @@ int main() {
             "text/html");
     });
 
-    svr.listen("0.0.0.0", 8080);
+    const char* port = std::getenv("PORT");
+int PORT = port ? std::stoi(port) : 8080;
+
+svr.listen("0.0.0.0", PORT);
     return 0;
 }
