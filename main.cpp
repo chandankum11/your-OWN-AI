@@ -1041,6 +1041,21 @@ int main()
                 {
         cors(res); res.status = 204; });
 
+    svr.Get("/", [](const httplib::Request &, httplib::Response &res)
+{
+    res.set_content("VectorDB Backend Running", "text/plain");
+});
+
+svr.Get("/status", [](const httplib::Request &, httplib::Response &res)
+{
+    res.set_content(R"({"status":"ok"})", "application/json");
+});
+
+svr.Get("/hnsw-info", [](const httplib::Request &, httplib::Response &res)
+{
+    res.set_content(R"({"message":"HNSW endpoint working"})", "application/json");
+});
+
     // ── DEMO VECTOR ENDPOINTS ─────────────────────────────────────────
 
     svr.Get("/search", [&](const httplib::Request &req, httplib::Response &res)
